@@ -1,34 +1,45 @@
 package com.epam.am.airlines;
 
-import com.sun.org.apache.xml.internal.security.keys.content.KeyValue;
-
 /**
  * Created by Alexander on 11.06.14.
  */
 public abstract class Plane extends Aircraft{
 
-//    private double keroseneDensity; //0.78-0.85 g/cm^3
-//    private final int pilotsNumber;
-//    private final int passengersNumber;
-//    private final double maxSpeed;
-//    private final double fuelTankVolume;
-//    private final double cruiseSpeed;
-//    private double currentFuelAmount;
 
-    protected final double maxRange;
-    protected final int seatingCapacity;
-    protected final double fuelConsumption; //http://newsruss.ru/doc/index.php/Расход_топлива_у_самолётов
-    private String manufacturer;
-    private String model;
     private long id;
-    
-    protected Plane(long id, String manufacturer, String model,
-                    double maxRange, int seatingCapacity, double fuelConsumption) {
+    private String model;
+    private String manufacturer;
+    private final int pilotsNumber;
+    private final double emptyWeight;
+    private final double maxTakeoffWeight;
+    protected double carryingCapacity; // = maxTakeoffWeight - emptyWeight - fuelWeight
+    protected final double maxRange;
+    private final double maxSpeed;
+    private final double cruiseSpeed;
+    protected final double fuelConsumption; //http://newsruss.ru/doc/index.php/Расход_топлива_у_самолётов
+    private final double fuelTankVolume;
+    private double currentFuelAmount;
+    private Fuel fuel;
+
+    protected Plane(long id, String model, String manufacturer, int pilotsNumber,
+                    double emptyWeight, double maxTakeoffWeight, double maxRange,
+                    double maxSpeed, double cruiseSpeed, double fuelConsumption,
+                    double fuelTankVolume, double currentFuelAmount, Fuel fuel) {
         this.id = id;
-        this.manufacturer = manufacturer;
         this.model = model;
+        this.manufacturer = manufacturer;
+        this.pilotsNumber = pilotsNumber;
+        this.emptyWeight = emptyWeight;
+        this.maxTakeoffWeight = maxTakeoffWeight;
         this.maxRange = maxRange;
-        this.seatingCapacity = seatingCapacity;
+        this.maxSpeed = maxSpeed;
+        this.cruiseSpeed = cruiseSpeed;
         this.fuelConsumption = fuelConsumption;
+        this.fuelTankVolume = fuelTankVolume;
+        this.currentFuelAmount = currentFuelAmount;
+        this.fuel = fuel;
+
+        this.carryingCapacity = maxTakeoffWeight - emptyWeight - (fuel.getDensity() * currentFuelAmount);
     }
+
 }
