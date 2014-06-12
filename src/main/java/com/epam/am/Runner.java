@@ -1,11 +1,15 @@
 package com.epam.am;
 
-import com.epam.am.airlines.Airliner;
-import com.epam.am.airlines.Plane;
+import com.epam.am.aircraft.AircraftException;
+import com.epam.am.aircraft.Plane;
+import com.epam.am.aircraft.PlaneBuilder;
 
-/**
- * Created by Alexander on 11.06.14.
- */
 public class Runner {
-    Plane a = new Airliner.PlaneBuilder().createPlane();
+    public static void main(String[] args) {
+        try {
+            Plane customPlane = new PlaneBuilder().buildPlane();
+        } catch (AircraftException e) {
+            e.printStackTrace();
+        }
+    }
 }
