@@ -1,5 +1,8 @@
 package com.epam.am.aircraft;
 
+import com.epam.am.exception.AircraftBuildingException;
+
+import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +22,7 @@ public class PlaneBuilder {
     private FuelTank fuelTank;
     private int seatingCapacity;
     private int currentPassengersNumber;
+    private Point currentLocation;
 
     public PlaneBuilder() {
         isSet = new HashMap<String, Boolean>();
@@ -28,18 +32,18 @@ public class PlaneBuilder {
         }
     }
 
-    public Plane buildPlane() throws AircraftException {
+    public Plane buildPlane() throws AircraftBuildingException {
         StringBuilder message = new StringBuilder();
         for (String s : Parts.allParts()) {
             if (isSet.get(s) == false) {
                 message.append("\n" + s);
             }
         }
-        if (!message.toString().equals("")) throw new AircraftException("You haven't set: " + message.toString()
+        if (!message.toString().equals("")) throw new AircraftBuildingException("You haven't set: " + message.toString()
                 + "\n\nAll fields must be set");
         return new Plane(id, manufacturer, model, weight, maxCarryingCapacity,
                 maxHeight, maxSpeed, maxRange, engines, fuelTank,
-                seatingCapacity, currentPassengersNumber);
+                seatingCapacity, currentPassengersNumber, currentLocation);
     }
 
     public PlaneBuilder id(long id) {
@@ -114,6 +118,12 @@ public class PlaneBuilder {
         return this;
     }
 
+    public PlaneBuilder currentLocation(Point currentLocation) {
+        this.currentLocation = currentLocation;
+        isSet.replace(Parts.CURRENT_LOCATION, true);
+        return this;
+    }
+
     public static class Parts {
         public static final String ID = "id";
         public static final String MANUFACTURER = "manufacturer";
@@ -127,10 +137,11 @@ public class PlaneBuilder {
         public static final String FUEL_TANK = "fuelTank";
         public static final String SEATING_CAPACITY = "seatingCapacity";
         public static final String CURRENT_PASSENGERS_NUMBER = "currentPassengersNumber";
+        public static final String CURRENT_LOCATION = "currentLocation";
 
         public static String[] allParts() {
             return new String[]{ID, MANUFACTURER, MODEL, WEIGHT, MAX_CARRYING_CAPACITY, MAX_HEIGHT, MAX_SPEED,
-                    MAX_RANGE, ENGINES, FUEL_TANK, SEATING_CAPACITY, CURRENT_PASSENGERS_NUMBER};
+                    MAX_RANGE, ENGINES, FUEL_TANK, SEATING_CAPACITY, CURRENT_PASSENGERS_NUMBER, CURRENT_LOCATION};
         }
     }
 }

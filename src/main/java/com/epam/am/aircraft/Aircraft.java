@@ -1,6 +1,8 @@
 package com.epam.am.aircraft;
 
-public abstract class Aircraft {
+import java.awt.*;
+
+public abstract class Aircraft implements Flyable {
     private final long id;
     private final String manufacturer;
     private final String model;
@@ -9,9 +11,10 @@ public abstract class Aircraft {
     private final double maxHeight;
     private final double maxSpeed;
     private final double maxRange;
+    private Point currentLocation;
 
     protected Aircraft(long id, String manufacturer, String model, double weight, double maxCarryingCapacity,
-                       double maxHeight, double maxSpeed, double maxRange) {
+                       double maxHeight, double maxSpeed, double maxRange, Point currentLocation) {
         this.id = id;
         this.manufacturer = manufacturer;
         this.model = model;
@@ -20,7 +23,10 @@ public abstract class Aircraft {
         this.maxHeight = maxHeight;
         this.maxSpeed = maxSpeed;
         this.maxRange = maxRange;
+        this.currentLocation = currentLocation;
     }
+
+//    public abstract void flyTo(Point pointB) throws RangeException;
 
     public long getId() {
         return id;
@@ -52,5 +58,24 @@ public abstract class Aircraft {
 
     public double getMaxRange() {
         return maxRange;
+    }
+
+    public Point getCurrentLocation() {
+        return currentLocation;
+    }
+
+    @Override
+    public String toString() {
+        return "Aircraft{" +
+                "\nid=" + id +
+                ", \nmanufacturer='" + manufacturer + '\'' +
+                ", \nmodel='" + model + '\'' +
+                ", \nweight=" + weight +
+                ", \nmaxCarryingCapacity=" + maxCarryingCapacity +
+                ", \nmaxHeight=" + maxHeight +
+                ", \nmaxSpeed=" + maxSpeed +
+                ", \nmaxRange=" + maxRange +
+                ", \ncurrentLocation=" + currentLocation +
+                '}';
     }
 }
