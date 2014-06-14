@@ -15,7 +15,6 @@ public class PlaneBuilder {
     private String model;
     private double weight;
     private double maxCarryingCapacity;
-    private double maxHeight;
     private double maxSpeed;
     private double maxRange;
     private List<Engine> engines;
@@ -42,7 +41,7 @@ public class PlaneBuilder {
         if (!message.toString().equals("")) throw new AircraftBuildingException("You haven't set: " + message.toString()
                 + "\n\nAll fields must be set");
         return new Plane(id, manufacturer, model, weight, maxCarryingCapacity,
-                maxHeight, maxSpeed, maxRange, engines, fuelTank,
+                maxSpeed, maxRange, engines, fuelTank,
                 seatingCapacity, currentPassengersNumber, currentLocation);
     }
 
@@ -73,12 +72,6 @@ public class PlaneBuilder {
     public PlaneBuilder maxCarryingCapacity(double maxCarryingCapacity) {
         this.maxCarryingCapacity = maxCarryingCapacity;
         isSet.replace(Parts.MAX_CARRYING_CAPACITY, true);
-        return this;
-    }
-
-    public PlaneBuilder maxHeight(double maxHeight) {
-        this.maxHeight = maxHeight;
-        isSet.replace(Parts.MAX_HEIGHT, true);
         return this;
     }
 
@@ -130,7 +123,6 @@ public class PlaneBuilder {
         public static final String MODEL = "model";
         public static final String WEIGHT = "weight";
         public static final String MAX_CARRYING_CAPACITY = "maxCarryingCapacity";
-        public static final String MAX_HEIGHT = "maxHeight";
         public static final String MAX_SPEED = "maxSpeed";
         public static final String MAX_RANGE = "maxRange";
         public static final String ENGINES = "engines";
@@ -140,7 +132,7 @@ public class PlaneBuilder {
         public static final String CURRENT_LOCATION = "currentLocation";
 
         public static String[] allParts() {
-            return new String[]{ID, MANUFACTURER, MODEL, WEIGHT, MAX_CARRYING_CAPACITY, MAX_HEIGHT, MAX_SPEED,
+            return new String[]{ID, MANUFACTURER, MODEL, WEIGHT, MAX_CARRYING_CAPACITY, MAX_SPEED,
                     MAX_RANGE, ENGINES, FUEL_TANK, SEATING_CAPACITY, CURRENT_PASSENGERS_NUMBER, CURRENT_LOCATION};
         }
     }

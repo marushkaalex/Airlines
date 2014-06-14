@@ -8,19 +8,17 @@ public abstract class Aircraft implements Flyable {
     private final String model;
     private final double weight;
     private final double maxCarryingCapacity;
-    private final double maxHeight;
     private final double maxSpeed;
     private final double maxRange;
     private Point currentLocation;
 
     protected Aircraft(long id, String manufacturer, String model, double weight, double maxCarryingCapacity,
-                       double maxHeight, double maxSpeed, double maxRange, Point currentLocation) {
+                       double maxSpeed, double maxRange, Point currentLocation) {
         this.id = id;
         this.manufacturer = manufacturer;
         this.model = model;
         this.weight = weight;
         this.maxCarryingCapacity = maxCarryingCapacity;
-        this.maxHeight = maxHeight;
         this.maxSpeed = maxSpeed;
         this.maxRange = maxRange;
         this.currentLocation = currentLocation;
@@ -48,10 +46,6 @@ public abstract class Aircraft implements Flyable {
         return maxCarryingCapacity;
     }
 
-    public double getMaxHeight() {
-        return maxHeight;
-    }
-
     public double getMaxSpeed() {
         return maxSpeed;
     }
@@ -72,7 +66,6 @@ public abstract class Aircraft implements Flyable {
                 ", \nmodel='" + model + '\'' +
                 ", \nweight=" + weight +
                 ", \nmaxCarryingCapacity=" + maxCarryingCapacity +
-                ", \nmaxHeight=" + maxHeight +
                 ", \nmaxSpeed=" + maxSpeed +
                 ", \nmaxRange=" + maxRange +
                 ", \ncurrentLocation=" + currentLocation +

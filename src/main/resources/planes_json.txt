@@ -1,0 +1,47 @@
+{
+  "BOEING_777_200": {
+    "manufacturer": "Boeing",
+    "model": "777-200",
+    "weight": 139225,
+    "max_carrying_capacity": 14385,
+    "max_speed": 945,
+    "max_range": 9695,
+    "engines": [
+      5702,
+      5702
+    ],
+    "fuel_tank": 117000,
+    "seating_capacity": 400
+  }
+
+  "AIRBUS_A320": {
+      "manufacturer": "Airbus",
+      "model": "A320",
+      "weight": 42100,
+      "max_carrying_capacity": 18600,
+      "max_speed": 890,
+      "max_range": 6850,
+      "engines": [
+        2605.25,
+        2605.25
+      ],
+      "fuel_tank": 23860,
+      "seating_capacity": 180
+    }
+
+    "TU_154": {
+          "manufacturer": "Tupolev",
+          "model": "Tu-154",
+          "weight": 50700,
+          "max_carrying_capacity": 18000,
+          "max_speed": 935,
+          "max_range": 3900,
+          "engines": [
+            1766.66,
+            1766.66,
+            1766.66,
+          ],
+          "fuel_tank": 39750,
+          "seating_capacity": 180
+        }
+}

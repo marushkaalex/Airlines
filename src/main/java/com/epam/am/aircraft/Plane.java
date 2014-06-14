@@ -14,9 +14,9 @@ public class Plane extends Aircraft {
     private int currentPassengersNumber;
 
     protected Plane(long id, String manufacturer, String model, double weight, double maxCarryingCapacity,
-                    double maxHeight, double maxSpeed, double maxRange, List<Engine> engines,
+                    double maxSpeed, double maxRange, List<Engine> engines,
                     FuelTank fuelTank, int seatingCapacity, int currentPassengersNumber, Point currentLocation) {
-        super(id, manufacturer, model, weight, maxCarryingCapacity, maxHeight, maxSpeed, maxRange, currentLocation);
+        super(id, manufacturer, model, weight, maxCarryingCapacity, maxSpeed, maxRange, currentLocation);
         this.engines = engines;
         this.fuelTank = fuelTank;
         this.seatingCapacity = seatingCapacity;
