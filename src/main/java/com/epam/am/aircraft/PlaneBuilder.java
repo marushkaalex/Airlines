@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.epam.am.aircraft.AircraftPart.*;
+
+//TODO try to extend AircraftBuilder
 public class PlaneBuilder {
     private Map<String, Boolean> isSet;
 
@@ -25,7 +28,7 @@ public class PlaneBuilder {
 
     public PlaneBuilder() {
         isSet = new HashMap<String, Boolean>();
-        String[] parts = Parts.allParts();
+        String[] parts = allAircraftParts();
         for (String part : parts) {
             isSet.put(part, false);
         }
@@ -33,7 +36,7 @@ public class PlaneBuilder {
 
     public Plane buildPlane() throws AircraftBuildingException {
         StringBuilder message = new StringBuilder();
-        for (String s : Parts.allParts()) {
+        for (String s : allAircraftParts()) {
             if (isSet.get(s) == false) {
                 message.append("\n" + s);
             }
@@ -47,93 +50,73 @@ public class PlaneBuilder {
 
     public PlaneBuilder id(long id) {
         this.id = id;
-        isSet.replace(Parts.ID, true);
+        isSet.replace(ID, true);
         return this;
     }
 
     public PlaneBuilder manufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
-        isSet.replace(Parts.MANUFACTURER, true);
+        isSet.replace(MANUFACTURER, true);
         return this;
     }
 
     public PlaneBuilder model(String model) {
         this.model = model;
-        isSet.replace(Parts.MODEL, true);
+        isSet.replace(MODEL, true);
         return this;
     }
 
     public PlaneBuilder weight(double weight) {
         this.weight = weight;
-        isSet.replace(Parts.WEIGHT, true);
+        isSet.replace(WEIGHT, true);
         return this;
     }
 
     public PlaneBuilder maxCarryingCapacity(double maxCarryingCapacity) {
         this.maxCarryingCapacity = maxCarryingCapacity;
-        isSet.replace(Parts.MAX_CARRYING_CAPACITY, true);
+        isSet.replace(MAX_CARRYING_CAPACITY, true);
         return this;
     }
 
     public PlaneBuilder maxSpeed(double maxSpeed) {
         this.maxSpeed = maxSpeed;
-        isSet.replace(Parts.MAX_SPEED, true);
+        isSet.replace(MAX_SPEED, true);
         return this;
     }
 
     public PlaneBuilder maxRange(double maxRange) {
         this.maxRange = maxRange;
-        isSet.replace(Parts.MAX_RANGE, true);
+        isSet.replace(MAX_RANGE, true);
         return this;
     }
 
     public PlaneBuilder engines(List<Engine> engines) {
         this.engines = engines;
-        isSet.replace(Parts.ENGINES, true);
+        isSet.replace(ENGINES, true);
         return this;
     }
 
     public PlaneBuilder fuelTank(FuelTank fuelTank) {
         this.fuelTank = fuelTank;
-        isSet.replace(Parts.FUEL_TANK, true);
+        isSet.replace(FUEL_TANK, true);
         return this;
     }
 
     public PlaneBuilder seatingCapacity(int seatingCapacity) {
         this.seatingCapacity = seatingCapacity;
-        isSet.replace(Parts.SEATING_CAPACITY, true);
+        isSet.replace(SEATING_CAPACITY, true);
         return this;
     }
 
     public PlaneBuilder currentPassengersNumber(int currentPassengersNumber) {
         this.currentPassengersNumber = currentPassengersNumber;
-        isSet.replace(Parts.CURRENT_PASSENGERS_NUMBER, true);
+        isSet.replace(CURRENT_PASSENGERS_NUMBER, true);
         return this;
     }
 
     public PlaneBuilder currentLocation(Point currentLocation) {
         this.currentLocation = currentLocation;
-        isSet.replace(Parts.CURRENT_LOCATION, true);
+        isSet.replace(CURRENT_LOCATION, true);
         return this;
-    }
-
-    public static class Parts {
-        public static final String ID = "id";
-        public static final String MANUFACTURER = "manufacturer";
-        public static final String MODEL = "model";
-        public static final String WEIGHT = "weight";
-        public static final String MAX_CARRYING_CAPACITY = "maxCarryingCapacity";
-        public static final String MAX_SPEED = "maxSpeed";
-        public static final String MAX_RANGE = "maxRange";
-        public static final String ENGINES = "engines";
-        public static final String FUEL_TANK = "fuelTank";
-        public static final String SEATING_CAPACITY = "seatingCapacity";
-        public static final String CURRENT_PASSENGERS_NUMBER = "currentPassengersNumber";
-        public static final String CURRENT_LOCATION = "currentLocation";
-
-        public static String[] allParts() {
-            return new String[]{ID, MANUFACTURER, MODEL, WEIGHT, MAX_CARRYING_CAPACITY, MAX_SPEED,
-                    MAX_RANGE, ENGINES, FUEL_TANK, SEATING_CAPACITY, CURRENT_PASSENGERS_NUMBER, CURRENT_LOCATION};
-        }
     }
 }

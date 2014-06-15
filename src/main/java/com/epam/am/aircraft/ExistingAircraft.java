@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlaneJson {
+public class ExistingAircraft {
 
     private static final String MANUFACTURER = "manufacturer";
     private static final String MODEL = "model";
@@ -26,13 +26,13 @@ public class PlaneJson {
     private static final String FUEL_TANK = "fuel_tank";
     private static final String SEATING_CAPACITY = "seating_capacity";
 
-    private PlaneJson() {
+    private ExistingAircraft() {
     }
 
     public static Plane getExistingPlane(String planeName, long id, double fuelVolume,
                                          int currentPassengersNumber, Point currentLocation)
             throws IOException, ParseException, AircraftBuildingException {
-        InputStream is = PlaneJson.class.getResourceAsStream("/planes_json.txt");
+        InputStream is = ExistingAircraft.class.getResourceAsStream("/aircrafts_json.txt");
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
         String buf;
@@ -42,13 +42,14 @@ public class PlaneJson {
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(sb.toString());
         JSONObject planeObject = (JSONObject) ((JSONObject) obj).get(planeName);
-        return new PlaneBuilder().id(id)
+        return new PlaneBuilder()
+                .id(id)
                 .manufacturer((String) planeObject.get(MANUFACTURER))
                 .model((String) planeObject.get(MODEL))
                 .weight(((Long) planeObject.get(WEIGHT)).doubleValue())
                 .maxCarryingCapacity(((Long) planeObject.get(MAX_CARRYING_CAPACITY)).doubleValue())
                 .maxSpeed(((Long) planeObject.get(MAX_SPEED)).doubleValue())
-                .maxRange(((Long) planeObject.get(MAX_RANGE)).doubleValue()) //11404
+                .maxRange(((Long) planeObject.get(MAX_RANGE)).doubleValue())
                 .engines(getEngines(planeObject))
                 .fuelTank(new FuelTank(((Long) planeObject.get(FUEL_TANK)).doubleValue(), fuelVolume))
                 .seatingCapacity(((Long) planeObject.get(SEATING_CAPACITY)).intValue())

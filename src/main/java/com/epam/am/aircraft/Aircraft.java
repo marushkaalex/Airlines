@@ -1,8 +1,11 @@
 package com.epam.am.aircraft;
 
+import com.epam.am.exception.NotEnoughFuel;
+import com.epam.am.exception.RangeException;
+
 import java.awt.*;
 
-public abstract class Aircraft implements Flyable {
+public class Aircraft implements Flyable {
     private final long id;
     private final String manufacturer;
     private final String model;
@@ -14,14 +17,29 @@ public abstract class Aircraft implements Flyable {
 
     protected Aircraft(long id, String manufacturer, String model, double weight, double maxCarryingCapacity,
                        double maxSpeed, double maxRange, Point currentLocation) {
-        this.id = id;
+        this.id = checkSign(id);
         this.manufacturer = manufacturer;
         this.model = model;
         this.weight = weight;
-        this.maxCarryingCapacity = maxCarryingCapacity;
-        this.maxSpeed = maxSpeed;
-        this.maxRange = maxRange;
+        this.maxCarryingCapacity = checkSign(maxCarryingCapacity);
+        this.maxSpeed = checkSign(maxSpeed);
+        this.maxRange = checkSign(maxRange);
         this.currentLocation = currentLocation;
+    }
+
+    protected int checkSign(int a) {
+        if (a < 0) throw new IllegalArgumentException("Argument must be > 0");
+        return a;
+    }
+
+    protected double checkSign(double a) {
+        if (a < 0) throw new IllegalArgumentException("Argument must be > 0");
+        return a;
+    }
+
+    protected long checkSign(long a) {
+        if (a < 0) throw new IllegalArgumentException("Argument must be > 0");
+        return a;
     }
 
     public long getId() {
@@ -55,6 +73,11 @@ public abstract class Aircraft implements Flyable {
     public Point getCurrentLocation() {
         return currentLocation;
     }
+
+    public void flyTo(Point pointB) throws RangeException, NotEnoughFuel {
+        currentLocation = pointB;
+    }
+
 
     @Override
     public String toString() {
