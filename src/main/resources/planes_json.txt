@@ -37,9 +37,9 @@
           "max_speed": 935,
           "max_range": 3900,
           "engines": [
-            1766.66,
-            1766.66,
-            1766.66,
+            1766,
+            1766,
+            1766,
           ],
           "fuel_tank": 39750,
           "seating_capacity": 180

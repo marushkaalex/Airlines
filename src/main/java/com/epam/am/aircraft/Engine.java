@@ -1,20 +1,24 @@
 package com.epam.am.aircraft;
 
 public class Engine {
-    private final double AverageFuelConsumption;
+    private final double averageFuelConsumption;
 
     public Engine(double averageFuelConsumption) {
-        AverageFuelConsumption = averageFuelConsumption;
+        this.averageFuelConsumption = averageFuelConsumption;
+    }
+
+    public Engine(Long averageFuelConsumption) {
+        this.averageFuelConsumption = averageFuelConsumption.doubleValue();
     }
 
     public double getAverageFuelConsumption() {
-        return AverageFuelConsumption;
+        return averageFuelConsumption;
     }
 
     @Override
     public String toString() {
         return "Engine{" +
-                "AverageFuelConsumption=" + AverageFuelConsumption +
+                "averageFuelConsumption=" + averageFuelConsumption +
                 '}';
     }
 }

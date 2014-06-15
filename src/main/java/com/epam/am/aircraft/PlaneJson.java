@@ -60,8 +60,9 @@ public class PlaneJson {
     private static List<Engine> getEngines(JSONObject planeObject) {
         List<Engine> engines = new ArrayList<Engine>();
         JSONArray jsonArray = (JSONArray) planeObject.get(ENGINES);
-        for (int i = 0; i < jsonArray.size(); i++) {
-            engines.add(new Engine((Double) jsonArray.get(i)));
+        for (Object o : jsonArray) {
+            Number a = (Number) o;
+            engines.add(new Engine(a.doubleValue()));
         }
         return engines;
     }

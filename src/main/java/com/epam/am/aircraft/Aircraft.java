@@ -24,8 +24,6 @@ public abstract class Aircraft implements Flyable {
         this.currentLocation = currentLocation;
     }
 
-//    public abstract void flyTo(Point pointB) throws RangeException;
-
     public long getId() {
         return id;
     }
