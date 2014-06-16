@@ -16,6 +16,12 @@ public class Plane extends PoweredAircraft {
         this.currentPassengersNumber = passengersNumberCheck(currentPassengersNumber) ? currentPassengersNumber : seatingCapacity;
     }
 
+    protected Plane(AircraftBuilder builder, List<Engine> engines, FuelTank fuelTank, int seatingCapacity, int currentPassengersNumber) {
+        super(builder, engines, fuelTank);
+        this.seatingCapacity = checkSign(seatingCapacity);
+        this.currentPassengersNumber = passengersNumberCheck(currentPassengersNumber) ? currentPassengersNumber : seatingCapacity;
+    }
+
     private boolean passengersNumberCheck(int passengers) {
         return checkSign(passengers) <= seatingCapacity;
     }

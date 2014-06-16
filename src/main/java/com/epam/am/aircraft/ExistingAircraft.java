@@ -42,20 +42,32 @@ public class ExistingAircraft {
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(sb.toString());
         JSONObject planeObject = (JSONObject) ((JSONObject) obj).get(planeName);
-        return new PlaneBuilder()
-                .id(id)
+//        return new PlaneBuilder()
+//                .id(id)
+//                .manufacturer((String) planeObject.get(MANUFACTURER))
+//                .model((String) planeObject.get(MODEL))
+//                .weight(((Long) planeObject.get(WEIGHT)).doubleValue())
+//                .maxCarryingCapacity(((Long) planeObject.get(MAX_CARRYING_CAPACITY)).doubleValue())
+//                .maxSpeed(((Long) planeObject.get(MAX_SPEED)).doubleValue())
+//                .maxRange(((Long) planeObject.get(MAX_RANGE)).doubleValue())
+//                .engines(getEngines(planeObject))
+//                .fuelTank(new FuelTank(((Long) planeObject.get(FUEL_TANK)).doubleValue(), fuelVolume))
+//                .seatingCapacity(((Long) planeObject.get(SEATING_CAPACITY)).intValue())
+//                .currentPassengersNumber(currentPassengersNumber)
+//                .currentLocation(currentLocation)
+//                .buildPlane();
+        return new Plane(new Aircraft.AircraftBuilder().id(id)
                 .manufacturer((String) planeObject.get(MANUFACTURER))
                 .model((String) planeObject.get(MODEL))
                 .weight(((Long) planeObject.get(WEIGHT)).doubleValue())
                 .maxCarryingCapacity(((Long) planeObject.get(MAX_CARRYING_CAPACITY)).doubleValue())
                 .maxSpeed(((Long) planeObject.get(MAX_SPEED)).doubleValue())
                 .maxRange(((Long) planeObject.get(MAX_RANGE)).doubleValue())
-                .engines(getEngines(planeObject))
-                .fuelTank(new FuelTank(((Long) planeObject.get(FUEL_TANK)).doubleValue(), fuelVolume))
-                .seatingCapacity(((Long) planeObject.get(SEATING_CAPACITY)).intValue())
-                .currentPassengersNumber(currentPassengersNumber)
-                .currentLocation(currentLocation)
-                .buildPlane();
+                .currentLocation(currentLocation),
+                getEngines(planeObject),
+                new FuelTank(((Number) planeObject.get(FUEL_TANK)).doubleValue(), currentPassengersNumber),
+                ((Number) planeObject.get(SEATING_CAPACITY)).intValue(),
+                currentPassengersNumber);
     }
 
     private static List<Engine> getEngines(JSONObject planeObject) {

@@ -7,13 +7,32 @@ import java.awt.*;
 import java.util.List;
 
 public class PoweredAircraft extends Aircraft {
-    private final List<Engine> engines;
-    private final FuelTank fuelTank;
+    protected final List<Engine> engines;
+    protected final FuelTank fuelTank;
 
     protected PoweredAircraft(long id, String manufacturer, String model, double weight, double maxCarryingCapacity,
                               double maxSpeed, double maxRange, Point currentLocation, List<Engine> engines,
                               FuelTank fuelTank) {
         super(id, manufacturer, model, weight, maxCarryingCapacity, maxSpeed, maxRange, currentLocation);
+        this.engines = engines;
+        this.fuelTank = fuelTank;
+    }
+
+//    private PoweredAircraft(AircraftBuilder builder) {
+//        super(builder.id,
+//                builder.manufacturer,
+//                builder.model,
+//                builder.weight,
+//                builder.maxCarryingCapacity,
+//                builder.maxSpeed,
+//                builder.maxRange,
+//                builder.currentLocation);
+//        engines = builder.engines;
+//        fuelTank = builder.fuelTank;
+//    }
+
+    public PoweredAircraft(AircraftBuilder builder, List<Engine> engines, FuelTank fuelTank) {
+        super(builder);
         this.engines = engines;
         this.fuelTank = fuelTank;
     }
