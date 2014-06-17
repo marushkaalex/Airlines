@@ -29,19 +29,36 @@
       "seating_capacity": 180
     }
 
-    "TU_154": {
-          "manufacturer": "Tupolev",
-          "model": "Tu-154",
-          "weight": 50700,
-          "max_carrying_capacity": 18000,
-          "max_speed": 935,
-          "max_range": 3900,
-          "engines": [
-            1766,
-            1766,
-            1766,
-          ],
-          "fuel_tank": 39750,
-          "seating_capacity": 180
-        }
+  "TU_154": {
+        "manufacturer": "Tupolev",
+        "model": "Tu-154",
+        "weight": 50700,
+        "max_carrying_capacity": 18000,
+        "max_speed": 935,
+        "max_range": 3900,
+        "engines": [
+          1766,
+          1766,
+          1766
+        ],
+        "fuel_tank": 39750,
+        "seating_capacity": 180
+      }
+
+  "AN_124_100": {
+      "manufacturer": "Antonov",
+      "model": "An-124-100",
+      "weight": 180000,
+      "max_carrying_capacity": 120000,
+      "max_speed": 865,
+      "max_range": 4800,
+      "engines": [
+        3150,
+        3150,
+        3150,
+        3150
+      ],
+      "fuel_tank": 212350,
+      "seating_capacity": 28
+    }
 }

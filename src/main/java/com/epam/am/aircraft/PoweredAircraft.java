@@ -1,7 +1,9 @@
 package com.epam.am.aircraft;
 
+import com.epam.am.exception.AircraftBuildingException;
 import com.epam.am.exception.NotEnoughFuel;
 import com.epam.am.exception.RangeException;
+import com.sun.istack.internal.NotNull;
 
 import java.awt.*;
 import java.util.List;
@@ -10,13 +12,13 @@ public class PoweredAircraft extends Aircraft {
     protected final List<Engine> engines;
     protected final FuelTank fuelTank;
 
-    protected PoweredAircraft(long id, String manufacturer, String model, double weight, double maxCarryingCapacity,
-                              double maxSpeed, double maxRange, Point currentLocation, List<Engine> engines,
-                              FuelTank fuelTank) {
-        super(id, manufacturer, model, weight, maxCarryingCapacity, maxSpeed, maxRange, currentLocation);
-        this.engines = engines;
-        this.fuelTank = fuelTank;
-    }
+//    protected PoweredAircraft(long id, String manufacturer, String model, double weight, double maxCarryingCapacity,
+//                              double maxSpeed, double maxRange, Point currentLocation, List<Engine> engines,
+//                              FuelTank fuelTank) {
+//        super(id, manufacturer, model, weight, maxCarryingCapacity, maxSpeed, maxRange, currentLocation);
+//        this.engines = engines;
+//        this.fuelTank = fuelTank;
+//    }
 
 //    private PoweredAircraft(AircraftBuilder builder) {
 //        super(builder.id,
@@ -31,7 +33,7 @@ public class PoweredAircraft extends Aircraft {
 //        fuelTank = builder.fuelTank;
 //    }
 
-    public PoweredAircraft(AircraftBuilder builder, List<Engine> engines, FuelTank fuelTank) {
+    public PoweredAircraft(AircraftBuilder builder, @NotNull List<Engine> engines, @NotNull FuelTank fuelTank) throws AircraftBuildingException {
         super(builder);
         this.engines = engines;
         this.fuelTank = fuelTank;
@@ -45,7 +47,7 @@ public class PoweredAircraft extends Aircraft {
         return fuelTank;
     }
 
-    protected double totalConsumption() {
+    public double totalConsumption() {
         double consumption = 0;
         for (Engine engine : engines) {
             consumption += engine.getAverageFuelConsumption();

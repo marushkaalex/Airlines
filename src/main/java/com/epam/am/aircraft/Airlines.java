@@ -1,6 +1,7 @@
 package com.epam.am.aircraft;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Airlines {
@@ -11,7 +12,7 @@ public class Airlines {
     public Airlines(long id, String name) {
         this.id = id;
         this.name = name;
-        planes = new ArrayList<Plane>();
+        planes = new ArrayList<>();
     }
 
     public Airlines(long id, String name, List<Plane> planes) {
@@ -55,9 +56,9 @@ public class Airlines {
     }
 
     public List<String> getPlanesInfo() {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         for (Plane plane : planes) {
-            list.add(plane.getManufacturer() + " " + plane.getModel() + " id = " + plane.getId());
+            list.add(plane.getModelInfo());
         }
         return list;
     }
@@ -69,5 +70,25 @@ public class Airlines {
                 ", name='" + name + '\'' +
                 ", planes=" + planes +
                 '}';
+    }
+
+    public void sortPlanesByRange() {
+        Collections.sort(planes, (planeA, planeB) -> Double.compare(planeA.totalConsumption(), planeB.totalConsumption()));
+    }
+
+    public void sortPlanesByWeight() {
+        Collections.sort(planes, (planeA, planeB) -> Double.compare(planeA.getWeight(), planeB.getWeight()));
+    }
+
+    public void sortPlanesBySeatingCapacity() {
+        Collections.sort(planes, (planeA, planeB) -> Double.compare(planeA.getSeatingCapacity(), planeB.getSeatingCapacity()));
+    }
+
+    public List<Plane> findPlanesByRange(double min, double max) {
+        List<Plane> result = new ArrayList<>();
+        for (Plane plane : planes) {
+            if (plane.getMaxRange() >= min && plane.getMaxRange() <= max) result.add(plane);
+        }
+        return result;
     }
 }

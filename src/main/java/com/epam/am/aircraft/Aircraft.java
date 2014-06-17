@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.epam.am.aircraft.AircraftPart.*;
+import static com.epam.am.aircraft.Aircraft.Part.*;
 
 public class Aircraft implements Flyable {
     private final long id;
@@ -20,19 +20,20 @@ public class Aircraft implements Flyable {
     private final double maxRange;
     private Point currentLocation;
 
-    protected Aircraft(long id, String manufacturer, String model, double weight, double maxCarryingCapacity,
-                       double maxSpeed, double maxRange, Point currentLocation) {
-        this.id = checkSign(id);
-        this.manufacturer = manufacturer;
-        this.model = model;
-        this.weight = weight;
-        this.maxCarryingCapacity = checkSign(maxCarryingCapacity);
-        this.maxSpeed = checkSign(maxSpeed);
-        this.maxRange = checkSign(maxRange);
-        this.currentLocation = currentLocation;
-    }
+//    protected Aircraft(long id, String manufacturer, String model, double weight, double maxCarryingCapacity,
+//                       double maxSpeed, double maxRange, Point currentLocation) {
+//        this.id = checkSign(id);
+//        this.manufacturer = manufacturer;
+//        this.model = model;
+//        this.weight = weight;
+//        this.maxCarryingCapacity = checkSign(maxCarryingCapacity);
+//        this.maxSpeed = checkSign(maxSpeed);
+//        this.maxRange = checkSign(maxRange);
+//        this.currentLocation = currentLocation;
+//    }
 
-    protected Aircraft(AircraftBuilder builder) {
+    public Aircraft(AircraftBuilder builder) throws AircraftBuildingException {
+        builder.isCompleted();
         this.id = checkSign(builder.id);
         this.manufacturer = builder.manufacturer;
         this.model = builder.model;
@@ -96,7 +97,7 @@ public class Aircraft implements Flyable {
 
     @Override
     public String toString() {
-        return "ololo.Aircraft{" +
+        return "Aircraft{" +
                 "\nid=" + id +
                 ", \nmanufacturer='" + manufacturer + '\'' +
                 ", \nmodel='" + model + '\'' +
@@ -120,7 +121,7 @@ public class Aircraft implements Flyable {
         private Map<String, Boolean> isSet;
 
         public AircraftBuilder() {
-            isSet = new HashMap<String, Boolean>();
+            isSet = new HashMap<>();
             for (String part : allAircraftParts()) {
                 isSet.put(part, false);
             }
@@ -174,7 +175,7 @@ public class Aircraft implements Flyable {
             return this;
         }
 
-        public Aircraft build() throws AircraftBuildingException {
+        private void isCompleted() throws AircraftBuildingException {
             StringBuilder message = new StringBuilder();
             for (String s : allAircraftParts()) {
                 if (isSet.get(s) == false) {
@@ -184,8 +185,32 @@ public class Aircraft implements Flyable {
             if (!message.toString().equals(""))
                 throw new AircraftBuildingException("You haven't set: " + message.toString()
                         + "\n\nAll fields must be set");
-            return new Aircraft(this);
         }
+    }
+
+    public static class Part {
+
+        public static final String ID = "id";
+        public static final String MANUFACTURER = "manufacturer";
+        public static final String MODEL = "model";
+        public static final String WEIGHT = "weight";
+        public static final String MAX_CARRYING_CAPACITY = "maxCarryingCapacity";
+        public static final String MAX_SPEED = "maxSpeed";
+        public static final String MAX_RANGE = "maxRange";
+        //        public static final String ENGINES = "engines";
+//        public static final String FUEL_TANK = "fuelTank";
+//        public static final String SEATING_CAPACITY = "seatingCapacity";
+//        public static final String CURRENT_PASSENGERS_NUMBER = "currentPassengersNumber";
+        public static final String CURRENT_LOCATION = "currentLocation";
+
+        public static String[] allAircraftParts() {
+            return new String[]{ID, MANUFACTURER, MODEL, WEIGHT, MAX_CARRYING_CAPACITY, MAX_SPEED,
+                    MAX_RANGE, CURRENT_LOCATION};
+        }
+    }
+
+    public String getModelInfo() {
+        return getManufacturer() + " " + getModel() + " id=" + getId();
     }
 }
 

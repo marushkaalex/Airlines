@@ -42,20 +42,6 @@ public class ExistingAircraft {
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(sb.toString());
         JSONObject planeObject = (JSONObject) ((JSONObject) obj).get(planeName);
-//        return new PlaneBuilder()
-//                .id(id)
-//                .manufacturer((String) planeObject.get(MANUFACTURER))
-//                .model((String) planeObject.get(MODEL))
-//                .weight(((Long) planeObject.get(WEIGHT)).doubleValue())
-//                .maxCarryingCapacity(((Long) planeObject.get(MAX_CARRYING_CAPACITY)).doubleValue())
-//                .maxSpeed(((Long) planeObject.get(MAX_SPEED)).doubleValue())
-//                .maxRange(((Long) planeObject.get(MAX_RANGE)).doubleValue())
-//                .engines(getEngines(planeObject))
-//                .fuelTank(new FuelTank(((Long) planeObject.get(FUEL_TANK)).doubleValue(), fuelVolume))
-//                .seatingCapacity(((Long) planeObject.get(SEATING_CAPACITY)).intValue())
-//                .currentPassengersNumber(currentPassengersNumber)
-//                .currentLocation(currentLocation)
-//                .buildPlane();
         return new Plane(new Aircraft.AircraftBuilder().id(id)
                 .manufacturer((String) planeObject.get(MANUFACTURER))
                 .model((String) planeObject.get(MODEL))
@@ -65,13 +51,13 @@ public class ExistingAircraft {
                 .maxRange(((Long) planeObject.get(MAX_RANGE)).doubleValue())
                 .currentLocation(currentLocation),
                 getEngines(planeObject),
-                new FuelTank(((Number) planeObject.get(FUEL_TANK)).doubleValue(), currentPassengersNumber),
+                new FuelTank(((Number) planeObject.get(FUEL_TANK)).doubleValue(), fuelVolume),
                 ((Number) planeObject.get(SEATING_CAPACITY)).intValue(),
                 currentPassengersNumber);
     }
 
     private static List<Engine> getEngines(JSONObject planeObject) {
-        List<Engine> engines = new ArrayList<Engine>();
+        List<Engine> engines = new ArrayList<>();
         JSONArray jsonArray = (JSONArray) planeObject.get(ENGINES);
         for (Object o : jsonArray) {
             Number a = (Number) o;
@@ -80,9 +66,10 @@ public class ExistingAircraft {
         return engines;
     }
 
-    public interface Planes {
+    public static class Planes {
         public static final String BOEING_777_200 = "BOEING_777_200";
         public static final String AIRBUS_A320 = "AIRBUS_A320";
         public static final String TU_154 = "TU_154";
+        public static final String AN_124_100 = "AN_124_100";
     }
 }
