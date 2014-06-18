@@ -13,6 +13,7 @@ import java.awt.*;
 import java.io.IOException;
 
 public class Runner {
+
     public static void main(String[] args) throws ParseException, AircraftBuildingException, IOException {
         Plane a = ExistingAircraft.getExistingPlane(ExistingAircraft.Planes.TU_154, 1, 100, 100, new Point(1, 1));
         Plane b = ExistingAircraft.getExistingPlane(ExistingAircraft.Planes.BOEING_777_200, 2, 500, 200, new Point(25, 25));
@@ -54,5 +55,6 @@ public class Runner {
         System.out.println(d.getCurrentLocation());
         System.out.println();
         System.out.println(pPlane.getModelInfo());
+//        log.error("asdf");
     }
 }

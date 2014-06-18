@@ -3,6 +3,8 @@ package com.epam.am.aircraft;
 import com.epam.am.exception.AircraftBuildingException;
 import com.epam.am.exception.NotEnoughFuel;
 import com.epam.am.exception.RangeException;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -11,6 +13,11 @@ import java.util.Map;
 import static com.epam.am.aircraft.Aircraft.Part.*;
 
 public class Aircraft implements Flyable {
+    private static final Logger log = Logger.getLogger(Aircraft.class);
+
+    static {
+        BasicConfigurator.configure();
+    }
     private final long id;
     private final String manufacturer;
     private final String model;
@@ -42,6 +49,7 @@ public class Aircraft implements Flyable {
         this.maxSpeed = checkSign(builder.maxSpeed);
         this.maxRange = checkSign(builder.maxRange);
         this.currentLocation = builder.currentLocation;
+        log.info("Aircraft \"" + manufacturer + model + "\", id=" + id + " has been created");
     }
 
     protected int checkSign(int a) {
@@ -107,6 +115,10 @@ public class Aircraft implements Flyable {
                 ", \nmaxRange=" + maxRange +
                 ", \ncurrentLocation=" + currentLocation +
                 '}';
+    }
+
+    public String getModelInfo() {
+        return getManufacturer() + " " + getModel() + " id=" + getId();
     }
 
     public static class AircraftBuilder {
@@ -207,10 +219,6 @@ public class Aircraft implements Flyable {
             return new String[]{ID, MANUFACTURER, MODEL, WEIGHT, MAX_CARRYING_CAPACITY, MAX_SPEED,
                     MAX_RANGE, CURRENT_LOCATION};
         }
-    }
-
-    public String getModelInfo() {
-        return getManufacturer() + " " + getModel() + " id=" + getId();
     }
 }
 
