@@ -55,6 +55,5 @@ public class Runner {
         System.out.println(d.getCurrentLocation());
         System.out.println();
         System.out.println(pPlane.getModelInfo());
-//        log.error("asdf");
     }
 }

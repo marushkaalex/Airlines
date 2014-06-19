@@ -27,18 +27,6 @@ public class Aircraft implements Flyable {
     private final double maxRange;
     private Point currentLocation;
 
-//    protected Aircraft(long id, String manufacturer, String model, double weight, double maxCarryingCapacity,
-//                       double maxSpeed, double maxRange, Point currentLocation) {
-//        this.id = checkSign(id);
-//        this.manufacturer = manufacturer;
-//        this.model = model;
-//        this.weight = weight;
-//        this.maxCarryingCapacity = checkSign(maxCarryingCapacity);
-//        this.maxSpeed = checkSign(maxSpeed);
-//        this.maxRange = checkSign(maxRange);
-//        this.currentLocation = currentLocation;
-//    }
-
     public Aircraft(AircraftBuilder builder) throws AircraftBuildingException {
         builder.isCompleted();
         this.id = checkSign(builder.id);
@@ -209,10 +197,6 @@ public class Aircraft implements Flyable {
         public static final String MAX_CARRYING_CAPACITY = "maxCarryingCapacity";
         public static final String MAX_SPEED = "maxSpeed";
         public static final String MAX_RANGE = "maxRange";
-        //        public static final String ENGINES = "engines";
-//        public static final String FUEL_TANK = "fuelTank";
-//        public static final String SEATING_CAPACITY = "seatingCapacity";
-//        public static final String CURRENT_PASSENGERS_NUMBER = "currentPassengersNumber";
         public static final String CURRENT_LOCATION = "currentLocation";
 
         public static String[] allAircraftParts() {
